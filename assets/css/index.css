@@ -1,7 +1,28 @@
 * {
-    font-family: "kawai-font" !important;
+  font-family: "kawai-font" !important;
+}
+
+@font-face {
+  font-family: "kawai-font";
+  src: url("../fonts/kawai-font.woff") format("woff");
 }
 
 i {
-    font-family: "Font Awesome 5 Free" !important;
+  font-family: "Font Awesome 5 Free" !important;
+}
+
+/* CSS */
+.sidebar {
+  width: 250px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.sidebar.hidden {
+  transform: translateX(-100%);
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    transform: none;
+  }
 }
