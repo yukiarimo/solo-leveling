@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no, maximum-scale=1.0, user-scalable=no">
 	<title>Solo Leveling</title>
 	<meta name="theme-color" content="rgb(58, 59, 69)">
 	<link rel="canonical" href="https://yukiarimo.github.io/solo-leveling/">
@@ -28,12 +28,12 @@
 	<link rel="icon" type="image/png" sizes="1661x1685" href="assets/img/solo-leveling.png">
 	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
 	<link rel="manifest" href="manifest.json" crossorigin="use-credentials">
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
 	<script src="assets/js/kawai-v11-2.js" defer></script>
 	<link rel="stylesheet" href="assets/css/kawai-v11-2.css">
 	<link rel="stylesheet" href="assets/css/index.css">
 	<script src="assets/js/index.js" defer></script>
 	<script src="assets/js/solo-leveling.js" defer></script>
+	<link rel="stylesheet" href="assets/css/awesome.css">
 	<script>
 		if ('serviceWorker' in navigator) {
 			window.addEventListener('load', function () {
@@ -56,7 +56,7 @@
 	<div id="wrapper">
 		<div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-black sidebar-o" id="sidebar">
 			<a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-				<img src="assets/img/solo-leveling.png" style="width: 40; height: 40;" alt="Solo Leveling Logo">
+				<img src="assets/img/solo-leveling.png" alt="Solo Leveling Logo">
 				<span class="fs-4">Solo Leveling</span>
 			</a>
 			<hr>
@@ -85,6 +85,11 @@
 						Rewards
 					</a>
 				</li>
+				<li>
+					<a href="#" class="nav-link text-white" onclick="OpenTab('5')">
+						<i class="fas fa-cog me-2"></i>
+						Settings
+					</a>
 			</ul>
 		</div>
 
@@ -93,7 +98,7 @@
 				<nav
 					class="navbar navbar-expand shadow mb-4 bg-dark text-white topbar static-top topbar-o navbar-light">
 					<div class="container-fluid">
-						<button class="btn btn-link rounded-circle me-3" onclick="toggleSidebar()" type="button"
+						<button class="btn btn-link rounded-circle me-3" onclick="toggleSidebar(); kawaiAutoScale()" type="button"
 							aria-label="Sidebar Switch Toggle"><i class="fas fa-bars"></i></button>
 						<form class="d-flex me-auto my-2 my-lg-0 navbar-search">
 							<div class="input-group">
@@ -155,102 +160,162 @@
 				</nav>
 
 				<div class="block-o">
-					<div class="tab-o tab-o-default" id="1">
-						<div class="container mt-4">
-							<div class="row">
-								<div class="col-md-4">
-									<div class="card">
-										<div class="card-header bg-primary">
-											Solo Leveling
-										</div>
-										<div class="card-body">
-											<h5 class="card-title">Stock</h5>
-											<p class="card-text">Yuki</p>
-											<p class="card-text">Level: 3</p>
-											<p class="card-text">XP: 500</p>
-											<p class="card-text">Coins: 0</p>
-										</div>
+					<div class="tab-o tab-o-default container mt-4" id="1">
+						<div class="row">
+							<div class="col-12">
+								<div class="card text-white bg-dark mb-3">
+									<div
+										class="card-header bg-primary d-flex justify-content-between align-items-center">
+										<h5 class="mb-0">Status</h5>
+										<i class="fas fa-user-circle"></i>
 									</div>
-								</div>
-								<div class="col-md-4">
-									<div class="card">
-										<div class="card-header bg-primary">
-											Working Quests
+									<div class="card-body">
+										<div class="mb-3">
+											<h6 class="card-subtitle text-muted">Player</h6>
+											<div class="card-text h4 mb-2">Yuki</div>
 										</div>
-										<ul class="list-group list-group-flush">
-											<li class="list-group-item">PQT <span
-													class="badge bg-primary float-right">XP 50 /
-													Coins 100</span></li>
-											<li class="list-group-item">WORK <span
-													class="badge bg-primary float-right">XP 115 /
-													Coins 30</span></li>
-										</ul>
-									</div>
-								</div>
-								<div class="col-md-4">
-									<div class="card">
-										<div class="card-header bg-primary">
-											Demand
+										<div class="mb-3">
+											<h6 class="card-subtitle text-muted">Level</h6>
+											<div class="card-text h4 mb-2">3</div>
 										</div>
-										<ul class="list-group list-group-flush">
-											<li class="list-group-item">Tasks <span
-													class="badge bg-secondary float-right">87/100</span></li>
-											<li class="list-group-item">Monthly <span
-													class="badge bg-secondary float-right">0/2</span></li>
-											<li class="list-group-item">Quests <span
-													class="badge bg-secondary float-right">0/5</span></li>
-											<li class="list-group-item">Skippers <span
-													class="badge bg-secondary float-right">1/2</span></li>
-										</ul>
-									</div>
-									<div class="card mt-3">
-										<div class="card-header bg-primary">
-											Benefits
+										<div class="mb-3">
+											<h6 class="card-subtitle text-muted">Experience</h6>
+											<div class="card-text h4 mb-2">500 XP</div>
 										</div>
-										<ul class="list-group list-group-flush">
-											<li class="list-group-item">Daily <span
-													class="badge bg-success float-right">1</span></li>
-											<li class="list-group-item">Skip <span
-													class="badge bg-success float-right">2</span>
-											</li>
-										</ul>
+										<div class="mb-3">
+											<h6 class="card-subtitle text-muted">Coins</h6>
+											<div class="card-text h4">0</div>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
+
+						<div class="row">
+							<div class="col-md-6">
+								<div class="card text-white bg-dark mb-3">
+									<div
+										class="card-header bg-primary d-flex justify-content-between align-items-center">
+										<h5 class="mb-0">Working Quests</h5>
+										<i class="fas fa-tasks"></i>
+									</div>
+									<ul class="list-group list-group-flush">
+										<li
+											class="list-group-item bg-dark d-flex justify-content-between align-items-center">
+											<span>PQT</span>
+											<div>
+												<div class="badge bg-primary mb-1">XP 50</div>
+												<div class="badge bg-primary">Coins 100</div>
+											</div>
+										</li>
+										<!-- Additional list items -->
+									</ul>
+								</div>
+
+								<div class="card text-white bg-dark mb-3">
+									<div
+										class="card-header bg-primary d-flex justify-content-between align-items-center">
+										<h5 class="mb-0">Penalty Area</h5>
+										<i class="fas fa-exclamation-triangle"></i>
+									</div>
+									<ul class="list-group list-group-flush">
+										<li
+											class="list-group-item bg-dark d-flex justify-content-between align-items-center">
+											<span>PQT</span>
+											<div>
+												<div class="badge bg-primary mb-1">XP 50</div>
+												<div class="badge bg-primary">Coins 100</div>
+											</div>
+										</li>
+										<!-- Additional list items -->
+									</ul>
+								</div>
+							</div>
+
+							<div class="col-md-6">
+								<div class="card text-white bg-dark mb-3">
+									<div
+										class="card-header bg-primary d-flex justify-content-between align-items-center">
+										<h5 class="mb-0">Demand</h5>
+										<i class="fas fa-chart-line"></i>
+									</div>
+									<ul class="list-group list-group-flush">
+										<li
+											class="list-group-item bg-dark d-flex justify-content-between align-items-center">
+											<span>Tasks</span>
+											<span class="badge bg-secondary">87/100</span>
+										</li>
+										<li
+											class="list-group-item bg-dark d-flex justify-content-between align-items-center">
+											<span>Monthly</span>
+											<span class="badge bg-secondary">0/2</span>
+										</li>
+										<li
+											class="list-group-item bg-dark d-flex justify-content-between align-items-center">
+											<span>Quests</span>
+											<span class="badge bg-secondary">0/5</span>
+										</li>
+										<li
+											class="list-group-item bg-dark d-flex justify-content-between align-items-center">
+											<span>Skippers</span>
+											<span class="badge bg-secondary">1/2</span>
+										</li>
+									</ul>
+								</div>
+
+								<div class="card text-white bg-dark mb-3">
+									<div
+										class="card-header bg-primary d-flex justify-content-between align-items-center">
+										<h5 class="mb-0">Benefits</h5>
+										<i class="fas fa-gift"></i>
+									</div>
+									<ul class="list-group list-group-flush">
+										<li
+											class="list-group-item bg-dark d-flex justify-content-between align-items-center">
+											<span>Daily</span>
+											<span class="badge bg-success">1</span>
+										</li>
+										<li
+											class="list-group-item bg-dark d-flex justify-content-between align-items-center">
+											<span>Skip</span>
+											<span class="badge bg-success">2</span>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
 					</div>
-					<div class="tab-o" id="2">
-						<div class="container mt-4">
-							<div class="row">
-								<div class="col-md-6">
-									<div class="card">
-										<div class="card-header bg-primary">
-											Shop
-										</div>
-										<div class="card-body">
-											<h5 class="card-title">Modes</h5>
-											<p class="card-text">Hard - 50 coins, Level 3, Time 24h</p>
-											<p class="card-text">Easy - 50 coins, Level 3, Time 24h</p>
-											<h5 class="card-title mt-3">Bonus</h5>
-											<p class="card-text">Night read - 20 coins, Level 3</p>
-											<p class="card-text">Todo deadline - 30 coins, Level 5</p>
-										</div>
+					<div class="tab-o container mt-4 mt-3 mt-md-0" id="2">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="card bg-dark text-white mb-3">
+									<div class="card-header bg-primary">
+										Shop
+									</div>
+									<div class="card-body">
+										<h5 class="card-title">Modes</h5>
+										<p class="card-text">Hard - 50 coins, Level 3, Time 24h</p>
+										<p class="card-text">Easy - 50 coins, Level 3, Time 24h</p>
+										<h5 class="card-title mt-3">Bonus</h5>
+										<p class="card-text">Night read - 20 coins, Level 3</p>
+										<p class="card-text">Todo deadline - 30 coins, Level 5</p>
 									</div>
 								</div>
-								<div class="col-md-6">
-									<div class="card">
-										<div class="card-header bg-primary">
-											Exchange
-										</div>
-										<div class="card-body">
-											<h5 class="card-title">Base</h5>
-											<p class="card-text">100 XP -> 1 coin</p>
-											<p class="card-text">10 coins -> 1 LVL UP</p>
-											<p class="card-text">7500 XP -> 10 coins</p>
-											<h5 class="card-title mt-3">Benefit</h5>
-											<p class="card-text">3 points -> 2500 XP</p>
-											<p class="card-text">10 points -> 1 retry</p>
-										</div>
+							</div>
+							<div class="col-md-6">
+								<div class="card bg-dark text-white mb-3">
+									<div class="card-header bg-primary">
+										Exchange
+									</div>
+									<div class="card-body">
+										<h5 class="card-title">Base</h5>
+										<p class="card-text">100 XP -> 1 coin</p>
+										<p class="card-text">10 coins -> 1 LVL UP</p>
+										<p class="card-text">7500 XP -> 10 coins</p>
+										<h5 class="card-title mt-3">Benefit</h5>
+										<p class="card-text">3 points -> 2500 XP</p>
+										<p class="card-text">10 points -> 1 retry</p>
 									</div>
 								</div>
 							</div>

@@ -4,6 +4,7 @@ importScripts('sw-toolbox.js');
 
 toolbox.precache([
     "/",
+    "/index.html",
     "/assets/css/bootstrap.min.css",
     "/assets/css/index.css",
     "/assets/css/kawai-v11-2.css",

@@ -1,10 +1,25 @@
 * {
   font-family: "kawai-font" !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
-@font-face {
-  font-family: "kawai-font";
-  src: url("../fonts/kawai-font.woff") format("woff");
+#sidebar>a {
+  margin-bottom: 0 !important;
+}
+
+#sidebar>a>img {
+  margin-right: 5%;
+  width: 45px !important;
+  height: 45px !important;
+}
+
+#sidebar>a>span {
+  white-space: nowrap;
 }
 
 i {
@@ -21,8 +36,54 @@ i {
   transform: translateX(-100%);
 }
 
+.tab-o.container {
+  display: none;
+}
+
+.tab-o-default.container {
+  display: flex;
+}
+
 @media (max-width: 768px) {
   .sidebar {
     transform: none;
+    display: none !important;
   }
+
+  .hideside {
+    display: none !important;
+  }
+}
+
+.custom-modal-style {
+  background: #004a7f;
+  /* Adjust the color to match the image */
+  border: none;
+  border-radius: 0;
+  /* Remove border radius if desired */
+}
+
+.custom-title-style {
+  color: #00fffc;
+  /* Adjust the color to match the image */
+  text-shadow: 0 0 10px #00fffc;
+  /* Add a glow effect to the title */
+}
+
+.custom-body-style {
+  color: white;
+  /* Adjust the color to match the image */
+}
+
+.custom-close-style {
+  color: white;
+  /* Adjust the color to match the image */
+  opacity: 1;
+  /* Make the close button fully visible */
+}
+
+/* Add custom styles for the backdrop */
+.modal-backdrop.show {
+  opacity: 1;
+  /* Fully opaque backdrop */
 }
