@@ -5876,7 +5876,7 @@
     font-style: normal;
     font-weight: 400;
     font-display: auto;
-    src: url(../fonts/fa-regular-400.woff) format("woff"), url(../fonts/fa-regular-400.svg) format("svg")
+    src: url(../fonts/fa-regular-400.woff) format("woff")
 }
 
 .far {
