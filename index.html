@@ -71,7 +71,7 @@
 				<li>
 					<a href="#" class="nav-link text-white" onclick="OpenTab('2')">
 						<i class="fas fa-shopping-bag me-2"></i>
-						Shop
+						Store
 					</a>
 				</li>
 				<li>
@@ -83,7 +83,7 @@
 				<li>
 					<a href="#" class="nav-link text-white" onclick="OpenTab('4')">
 						<i class="fas fa-star me-2"></i>
-						Rewards
+						Events
 					</a>
 				</li>
 				<li>
@@ -126,20 +126,28 @@
 							<li class="nav-item dropdown no-arrow">
 								<div class="nav-item dropdown no-arrow">
 									<a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown"
-										href="#"><span class="d-none d-lg-inline me-2 text-white"
-											id="name-top">Yuki</span><img class="border rounded-circle img-profile"
-											src="assets/img/solo-leveling.png" alt="Solo Leveling Player"></a>
+										href="#">
+										<span class="d-none d-lg-inline me-2 text-white" id="name-top">Menu</span>
+										<img class="border rounded-circle img-profile"
+											src="assets/img/solo-leveling.png" alt="Solo Leveling Player">
+									</a>
 									<div class="dropdown-menu shadow dropdown-menu-end animated--grow-in">
-										<a class="dropdown-item" href="#"><i
-												class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Profile</a><a
-											class="dropdown-item" href="#"><i
-												class="fas fa-cogs fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Settings</a><a
-											class="dropdown-item" href="#"><i
-												class="fas fa-list fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Activity
-											log</a>
-										<div class="dropdown-divider"></div>
-										<a class="dropdown-item" href="#"><i
-												class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
+										<a class="dropdown-item" href="#" onclick="OpenTab('1')">
+											<i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Status
+										</a>
+										<a class="dropdown-item" href="#" onclick="OpenTab('2')">
+											<i
+												class="fas fa-shopping-bag fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Store
+										</a>
+										<a class="dropdown-item" href="#" onclick="OpenTab('3')">
+											<i class="fas fa-compass fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Quests
+										</a>
+										<a class="dropdown-item" href="#" onclick="OpenTab('4')">
+											<i class="fas fa-star fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Events
+										</a>
+										<a class="dropdown-item" href="#" onclick="OpenTab('5')">
+											<i class="fas fa-cog fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Settings
+										</a>
 									</div>
 								</div>
 							</li>
@@ -162,7 +170,8 @@
 											<h6 class="card-subtitle text-muted">Player</h6>
 											<div class="card-text h4 mb-2" id="name">Yuki</div>
 											<button class="btn btn-outline-secondary btn-sm" id="editNameButton"
-												onclick="soloManager.renameUser(prompt('Enter your new name')), soloManager.update()">
+												onclick="soloManager.renameUser(prompt('Enter your new name')), soloManager.update()"
+												aria-label="Name Change">
 												<i class="fas fa-edit"></i>
 											</button>
 										</div>
@@ -236,22 +245,22 @@
 										<li
 											class="list-group-item bg-dark d-flex justify-content-between align-items-center">
 											<span>Tasks</span>
-											<span class="badge bg-secondary">87/100</span>
+											<span class="badge bg-dark">87/100</span>
 										</li>
 										<li
 											class="list-group-item bg-dark d-flex justify-content-between align-items-center">
 											<span>Monthly</span>
-											<span class="badge bg-secondary">0/2</span>
+											<span class="badge bg-dark">0/2</span>
 										</li>
 										<li
 											class="list-group-item bg-dark d-flex justify-content-between align-items-center">
 											<span>Quests</span>
-											<span class="badge bg-secondary">0/5</span>
+											<span class="badge bg-dark">0/5</span>
 										</li>
 										<li
 											class="list-group-item bg-dark d-flex justify-content-between align-items-center">
 											<span>Skippers</span>
-											<span class="badge bg-secondary">1/2</span>
+											<span class="badge bg-dark">1/2</span>
 										</li>
 									</ul>
 								</div>
@@ -285,13 +294,13 @@
 								<div class="card text-white bg-dark mb-3">
 									<div
 										class="card-header bg-primary d-flex justify-content-between align-items-center">
-										<h5 class="mb-0">Shop</h5>
+										<h5 class="mb-0">Store</h5>
+										<i class="fas fa-shopping-bag"></i>
 									</div>
 								</div>
 							</div>
 
-							<div class="row">
-							<div class="col-md-6"> 
+							<div class="col-md-6">
 								<div class="card text-white bg-dark mb-3">
 									<div
 										class="card-header bg-primary d-flex justify-content-between align-items-center">
@@ -312,6 +321,9 @@
 										</li>
 									</ul>
 								</div>
+							</div>
+
+							<div class="col-md-6">
 								<div class="card text-white bg-dark mb-3">
 									<div
 										class="card-header bg-primary d-flex justify-content-between align-items-center">
@@ -329,29 +341,24 @@
 									</ul>
 								</div>
 							</div>
-						</div>
+
 
 							<div class="col-12">
 								<div class="card text-white bg-dark mb-3">
 									<div
 										class="card-header bg-primary d-flex justify-content-between align-items-center">
-										<h5 class="mb-0">Shop</h5>
+										<h5 class="mb-0">Exchange</h5>
 									</div>
 								</div>
 							</div>
-							
+
 							<div class="col-md-6">
 								<div class="card text-white bg-dark mb-3">
 									<div
 										class="card-header bg-primary d-flex justify-content-between align-items-center">
-										<h5 class="mb-0">Exchange</h5>
+										<h5 class="mb-0">Base</h5>
 									</div>
 									<ul class="list-group list-group-flush">
-										<li class="list-group-item bg-dark">
-											<span>Base</span>
-											<span class="badge bg-primary float-end">100 xp</span>
-											<span class="badge bg-primary float-end">40 coins</span>
-										</li>
 										<li class="list-group-item bg-dark">
 											<span>1 coin</span>
 											<span class="badge bg-primary float-end">3 points</span>
@@ -362,6 +369,9 @@
 										</li>
 									</ul>
 								</div>
+							</div>
+
+							<div class="col-md-6">
 								<div class="card text-white bg-dark mb-3">
 									<div
 										class="card-header bg-primary d-flex justify-content-between align-items-center">
@@ -378,13 +388,200 @@
 						</div>
 					</div>
 
+					<div class="tab-o container mt-4" id="3">
+						<div class="row">
+							<!-- Daily Quests -->
+							<div class="col-12">
+								<div class="card text-white bg-dark mb-3">
+									<div
+										class="card-header bg-primary d-flex justify-content-between align-items-center">
+										<h5 class="mb-0">Single Tasks</h5>
+										<i class="fas fa-compass"></i>
+									</div>
+
+									<div class="card-body">
+										<p class="card-text">Complete these quests every day to earn quick rewards.</p>
+										<ul class="list-group list-group-flush">
+											<li class="list-group-item bg-dark">Defeat 10 Weak Monsters <span
+													class="badge bg-success float-end">+20 XP</span></li>
+											<li class="list-group-item bg-dark">Collect 5 Herbs <span
+													class="badge bg-success float-end">+10 Coins</span></li>
+											<li class="list-group-item bg-dark">Assist in a Dungeon Raid <span
+													class="badge bg-success float-end">+1 Potion</span></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<!-- Single Tasks -->
+							<div class="col-md-6">
+								<div class="card text-white bg-dark mb-3">
+									<div
+										class="card-header bg-primary d-flex justify-content-between align-items-center">
+										<h5 class="mb-0">Single Tasks</h5>
+										<i class="fas fa-tasks"></i>
+									</div>
+									<ul class="list-group list-group-flush">
+										<li
+											class="list-group-item bg-dark d-flex justify-content-between align-items-center">
+											Clear the Haunted Dungeon
+											<span class="badge bg-warning">Rare Item</span>
+										</li>
+										<li
+											class="list-group-item bg-dark d-flex justify-content-between align-items-center">
+											Escort the Merchant Caravan
+											<span class="badge bg-warning">+100 Coins</span>
+										</li>
+										<li
+											class="list-group-item bg-dark d-flex justify-content-between align-items-center">
+											Discover a Hidden Boss
+											<span class="badge bg-warning">+50 XP</span>
+										</li>
+									</ul>
+								</div>
+							</div>
+
+							<!-- Scheduled Quests -->
+							<div class="col-md-6">
+								<div class="card text-white bg-dark mb-3">
+									<div
+										class="card-header bg-primary d-flex justify-content-between align-items-center">
+										<h5 class="mb-0">Scheduled Quests</h5>
+										<i class="fas fa-tasks"></i>
+									</div>
+									<ul class="list-group list-group-flush">
+										<li
+											class="list-group-item bg-dark d-flex justify-content-between align-items-center">
+											Weekly: Boss Subjugation
+											<span class="badge bg-info">+300 XP</span>
+										</li>
+										<li
+											class="list-group-item bg-dark d-flex justify-content-between align-items-center">
+											Monthly: Guild Contribution
+											<span class="badge bg-info">Exclusive Gear</span>
+										</li>
+										<li
+											class="list-group-item bg-dark d-flex justify-content-between align-items-center">
+											Long-term: Reach Level 50
+											<span class="badge bg-info">Title: Elite Hunter</span>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+					<div class="tab-o container mt-4" id="4">
+						<div class="row">
+							<div class="col-12">
+								<div class="card text-white bg-dark mb-3">
+									<div
+										class="card-header bg-primary d-flex justify-content-between align-items-center">
+										<h5 class="mb-0">Upcoming Events</h5>
+										<i class="fas fa-calendar-alt"></i>
+									</div>
+
+									<div class="card-body">
+										<div class="mb-3">
+											<h6>Dungeon Break</h6>
+											<p>A sudden dungeon break has occurred in the city. Gather your team and
+												prevent the catastrophe!</p>
+											<ul>
+												<li>Date: March 5th, 2024</li>
+												<li>Time: 18:00 - 21:00</li>
+												<li>Rewards: 500 XP, 200 Coins, Special Item</li>
+											</ul>
+											<button class="btn btn-success">Join Event</button>
+										</div>
+										<div class="mb-3">
+											<h6>Guild Assembly</h6>
+											<p>Join the monthly guild assembly. Discuss strategies, share resources, and
+												strengthen your bonds.</p>
+											<ul>
+												<li>Date: March 15th, 2024</li>
+												<li>Time: 20:00 - 22:00</li>
+												<li>Location: Virtual Guild Hall</li>
+											</ul>
+											<button class="btn btn-success">Attend</button>
+										</div>
+										<div>
+											<h6>Raid Boss Challenge</h6>
+											<p>A powerful boss has appeared. Assemble your strongest allies and take on
+												this formidable challenge!</p>
+											<ul>
+												<li>Date: March 20th, 2024</li>
+												<li>Time: All day event</li>
+												<li>Rewards: Exclusive Gear, 1000 XP, 500 Coins</li>
+											</ul>
+											<button class="btn btn-success">Challenge</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="tab-o container mt-4" id="5">
+						<div class="card text-white bg-dark mb-3">
+							<div class="card-header bg-primary d-flex justify-content-between align-items-center">
+								<h5 class="mb-0">Settings</h5>
+								<i class="fas fa-cog"></i>
+							</div>
+							<div class="card-body">
+								<form>
+									<!-- Theme Selection -->
+									<div class="mb-3">
+										<label for="themeSelection" class="form-label">Theme</label>
+										<select class="form-select" id="themeSelection">
+											<option value="dark" selected>Dark</option>
+											<option value="light">Light</option>
+										</select>
+									</div>
+									<!-- Sound Effects Toggle -->
+									<div class="mb-3 form-check">
+										<input type="checkbox" class="form-check-input" id="soundEffectsToggle" checked>
+										<label class="form-check-label" for="soundEffectsToggle">Enable Sound
+											Effects</label>
+									</div>
+									<!-- Notification Settings -->
+									<div class="mb-3">
+										<label class="form-label">Notifications</label>
+										<div class="form-check">
+											<input class="form-check-input" type="checkbox" value=""
+												id="questNotifications" checked>
+											<label class="form-check-label" for="questNotifications">
+												Quest Updates
+											</label>
+										</div>
+										<div class="form-check">
+											<input class="form-check-input" type="checkbox" value=""
+												id="eventNotifications" checked>
+											<label class="form-check-label" for="eventNotifications">
+												Event Alerts
+											</label>
+										</div>
+									</div>
+									<!-- Account Actions -->
+									<div class="mb-3">
+										<button type="button" class="btn btn-warning">Change Password</button>
+										<button type="button" class="btn btn-danger">Delete Account</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
-		<script src="assets/js/jquery.min.js"></script>
-		<script src="assets/js/bootstrap.bundle.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
-		<script src="assets/js/script.min.js"></script>
+	</div>
+
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/bootstrap.bundle.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+	<script src="assets/js/script.min.js"></script>
 </body>
 
 </html>
