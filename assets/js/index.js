@@ -50,8 +50,8 @@ if (isMobile) {
   }
 }
 
-function createAndShowPopups() {
-  if (localStorage.getItem('status') == 'undefined' || localStorage.getItem('status') == null) {
+function createAndShowPopups(callback) {
+  if (localStorage.getItem('status') === 'undefined' || localStorage.getItem('status') === null) {
     // Function to create a Bootstrap modal with custom styles
     function createModal(id, title, body) {
       const modalHTML = `
@@ -79,7 +79,9 @@ function createAndShowPopups() {
     // Function to remove a modal from the DOM
     function removeModal(id) {
       const modalElement = document.getElementById(id);
-      modalElement.parentNode.removeChild(modalElement);
+      if (modalElement && modalElement.parentNode) {
+        modalElement.parentNode.removeChild(modalElement);
+      }
     }
 
     // Create the first modal
@@ -88,35 +90,38 @@ function createAndShowPopups() {
     // Show the first modal
     firstModal.show();
 
-    // Create an innerHTML small form element in Bootstrap 5 with a single input field and a submit button to collect input and parse it to the initializeSystem function
-    const formHTML = `
-      <form id="inputForm" class="form-inline justify-content-center">
-        <div class="mb-3">
-          <input type="text" class="form-control" id="inputField" placeholder="Enter your name">
-        </div>
-        <button type="button" class="btn btn-primary" onclick="initializeSystem()">Submit</button>
-      </form>
-    `;
-
     // When the first modal is closed, remove it and create the second modal
     firstModal._element.addEventListener('hidden.bs.modal', function () {
       removeModal('firstModal');
 
       // Create and show the second modal
-      const secondModal = createModal('secondModal', 'SYSTEM', formHTML);
+      const secondModal = createModal('secondModal', 'SYSTEM', `
+        <form id="inputForm" class="form-inline justify-content-center">
+          <div class="mb-3">
+            <input type="text" class="form-control" id="inputField" placeholder="Enter your name">
+          </div>
+          <button type="button" class="btn btn-primary" onclick="initializeSystem()">Submit</button>
+        </form>
+      `);
       secondModal.show();
 
-      // When the second modal is closed, remove it and stop the function
+      // When the second modal is closed, remove it
       secondModal._element.addEventListener('hidden.bs.modal', function () {
+        // get the input value from the input field and store it in the local storage
+        localStorage.setItem('nameInit', document.getElementById('inputField').value);
         removeModal('secondModal');
 
         // Create and show the third modal
-        const thirdModal = createModal('thirdModal', 'SYSTEM', 'Done! You are ready to play!');
+        const thirdModal = createModal('thirdModal', 'SYSTEM', `Ready ${localStorage.getItem('nameInit')}! You are ready to play!`);
         thirdModal.show();
 
-        // When the third modal is closed, remove it and stop the function
+        // When the third modal is closed, remove it and call the callback with the value
         thirdModal._element.addEventListener('hidden.bs.modal', function () {
           removeModal('thirdModal');
+          const nameInit = localStorage.getItem('nameInit');
+          if (callback) {
+            callback(nameInit);
+          }
         });
       });
     });
@@ -129,6 +134,3 @@ function initializeSystem() {
   console.log(inputField.value);
   secondModal.click();
 }
-
-// Call the function to execute the popup creation and handling
-createAndShowPopups();

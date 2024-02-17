@@ -112,24 +112,11 @@
 								<div class="nav-item dropdown no-arrow">
 									<a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown"
 										href="#"><i class="fas fa-bell fa-fw" aria-label="Notification Center"></i></a>
-									<div class="dropdown-menu dropdown-menu-end dropdown-list animated--grow-in">
-										<h6 class="dropdown-header">alerts center</h6>
-										<a class="dropdown-item d-flex align-items-center" href="#">
-											<div class="fw-bold">
-												<div class="text-truncate"><span>Hi there! I am wondering if you can
-														help me with a problem I've been having.</span></div>
-												<p class="small text-gray-500 mb-0">Emily Fowler - 58m</p>
-											</div>
-										</a>
-										<a class="dropdown-item d-flex align-items-center" href="#">
-											<div class="fw-bold">
-												<div class="text-truncate"><span>I have the photos that you ordered last
-														month!</span></div>
-												<p class="small text-gray-500 mb-0">Jae Chun - 1d</p>
-											</div>
-										</a>
-										<a class="dropdown-item text-center small text-gray-500" href="#">Show All
-											Alerts</a>
+									<div class="dropdown-menu dropdown-menu-end dropdown-list animated--grow-in"
+										id="notification-center">
+										<h6 class="dropdown-header">Notification center</h6>
+
+										<!-- Additional alerts -->
 									</div>
 								</div>
 								<div class="shadow dropdown-list dropdown-menu dropdown-menu-end"
@@ -139,9 +126,9 @@
 							<li class="nav-item dropdown no-arrow">
 								<div class="nav-item dropdown no-arrow">
 									<a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown"
-										href="#"><span class="d-none d-lg-inline me-2 text-white">Yuki</span><img
-											class="border rounded-circle img-profile" src="assets/img/solo-leveling.png"
-											alt="Solo Leveling Player"></a>
+										href="#"><span class="d-none d-lg-inline me-2 text-white"
+											id="name-top">Yuki</span><img class="border rounded-circle img-profile"
+											src="assets/img/solo-leveling.png" alt="Solo Leveling Player"></a>
 									<div class="dropdown-menu shadow dropdown-menu-end animated--grow-in">
 										<a class="dropdown-item" href="#"><i
 												class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Profile</a><a
@@ -173,19 +160,24 @@
 									<div class="card-body">
 										<div class="mb-3">
 											<h6 class="card-subtitle text-muted">Player</h6>
-											<div class="card-text h4 mb-2">Yuki</div>
+											<div class="card-text h4 mb-2" id="name">Yuki</div>
+											<button class="btn btn-outline-secondary btn-sm" id="editNameButton"
+												onclick="soloManager.renameUser(prompt('Enter your new name')), soloManager.update()">
+												<i class="fas fa-edit"></i>
+											</button>
 										</div>
+
 										<div class="mb-3">
 											<h6 class="card-subtitle text-muted">Level</h6>
-											<div class="card-text h4 mb-2">3</div>
+											<div class="card-text h4 mb-2" id="level">0</div>
 										</div>
 										<div class="mb-3">
 											<h6 class="card-subtitle text-muted">Experience</h6>
-											<div class="card-text h4 mb-2">500 XP</div>
+											<div class="card-text h4 mb-2" id="xp">0</div>
 										</div>
 										<div class="mb-3">
 											<h6 class="card-subtitle text-muted">Coins</h6>
-											<div class="card-text h4">0</div>
+											<div class="card-text h4" id="coins">0</div>
 										</div>
 									</div>
 								</div>
@@ -285,44 +277,107 @@
 								</div>
 							</div>
 						</div>
-
 					</div>
-					<div class="tab-o container mt-4 mt-3 mt-md-0" id="2">
+
+					<div class="tab-o container mt-4" id="2">
 						<div class="row">
-							<div class="col-md-6">
-								<div class="card bg-dark text-white mb-3">
-									<div class="card-header bg-primary">
-										Shop
-									</div>
-									<div class="card-body">
-										<h5 class="card-title">Modes</h5>
-										<p class="card-text">Hard - 50 coins, Level 3, Time 24h</p>
-										<p class="card-text">Easy - 50 coins, Level 3, Time 24h</p>
-										<h5 class="card-title mt-3">Bonus</h5>
-										<p class="card-text">Night read - 20 coins, Level 3</p>
-										<p class="card-text">Todo deadline - 30 coins, Level 5</p>
+							<div class="col-12">
+								<div class="card text-white bg-dark mb-3">
+									<div
+										class="card-header bg-primary d-flex justify-content-between align-items-center">
+										<h5 class="mb-0">Shop</h5>
 									</div>
 								</div>
 							</div>
-							<div class="col-md-6">
-								<div class="card bg-dark text-white mb-3">
-									<div class="card-header bg-primary">
-										Exchange
+
+							<div class="row">
+							<div class="col-md-6"> 
+								<div class="card text-white bg-dark mb-3">
+									<div
+										class="card-header bg-primary d-flex justify-content-between align-items-center">
+										<h5 class="mb-0">Modes</h5>
 									</div>
-									<div class="card-body">
-										<h5 class="card-title">Base</h5>
-										<p class="card-text">100 XP -> 1 coin</p>
-										<p class="card-text">10 coins -> 1 LVL UP</p>
-										<p class="card-text">7500 XP -> 10 coins</p>
-										<h5 class="card-title mt-3">Benefit</h5>
-										<p class="card-text">3 points -> 2500 XP</p>
-										<p class="card-text">10 points -> 1 retry</p>
+									<ul class="list-group list-group-flush">
+										<li class="list-group-item bg-dark">
+											<span>Hard</span>
+											<span class="badge bg-primary float-end">50 coins</span>
+											<span class="badge bg-primary float-end">Level 5</span>
+											<span class="badge bg-primary float-end">Time 24h</span>
+										</li>
+										<li class="list-group-item bg-dark">
+											<span>Easy</span>
+											<span class="badge bg-primary float-end">25 coins</span>
+											<span class="badge bg-primary float-end">Level 2</span>
+											<span class="badge bg-primary float-end">Time 12h</span>
+										</li>
+									</ul>
+								</div>
+								<div class="card text-white bg-dark mb-3">
+									<div
+										class="card-header bg-primary d-flex justify-content-between align-items-center">
+										<h5 class="mb-0">Shop</h5>
 									</div>
+									<ul class="list-group list-group-flush">
+										<li class="list-group-item bg-dark">
+											<span>Night read</span>
+											<span class="badge bg-primary float-end">50 coins</span>
+										</li>
+										<li class="list-group-item bg-dark">
+											<span>Todo</span>
+											<span class="badge bg-primary float-end">20 coins</span>
+										</li>
+									</ul>
 								</div>
 							</div>
 						</div>
 
+							<div class="col-12">
+								<div class="card text-white bg-dark mb-3">
+									<div
+										class="card-header bg-primary d-flex justify-content-between align-items-center">
+										<h5 class="mb-0">Shop</h5>
+									</div>
+								</div>
+							</div>
+							
+							<div class="col-md-6">
+								<div class="card text-white bg-dark mb-3">
+									<div
+										class="card-header bg-primary d-flex justify-content-between align-items-center">
+										<h5 class="mb-0">Exchange</h5>
+									</div>
+									<ul class="list-group list-group-flush">
+										<li class="list-group-item bg-dark">
+											<span>Base</span>
+											<span class="badge bg-primary float-end">100 xp</span>
+											<span class="badge bg-primary float-end">40 coins</span>
+										</li>
+										<li class="list-group-item bg-dark">
+											<span>1 coin</span>
+											<span class="badge bg-primary float-end">3 points</span>
+										</li>
+										<li class="list-group-item bg-dark">
+											<span>1 LVL UP</span>
+											<span class="badge bg-primary float-end">10 coins</span>
+										</li>
+									</ul>
+								</div>
+								<div class="card text-white bg-dark mb-3">
+									<div
+										class="card-header bg-primary d-flex justify-content-between align-items-center">
+										<h5 class="mb-0">Benefit</h5>
+									</div>
+									<ul class="list-group list-group-flush">
+										<li class="list-group-item bg-dark">
+											<span>25 XP</span>
+											<span class="badge bg-primary float-end">5 points</span>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
 					</div>
+
 				</div>
 			</div>
 		</div>
