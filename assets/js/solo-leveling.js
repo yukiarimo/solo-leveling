@@ -55,6 +55,8 @@ class SoloManager {
 
         // update the coins of the user
         document.getElementById('coins').innerText = this.data.status.coins;
+
+        this.generateHTML();
     }
 
     save() {
@@ -62,6 +64,8 @@ class SoloManager {
     }
 
     createItem(type, category, item) {
+        console.log(category)
+        console.log(this.data[type][category])
         if (!this.data[type] || !this.data[type][category]) {
             console.error('Invalid type or category');
             return;
@@ -94,8 +98,17 @@ class SoloManager {
     }
 
     renameUser(newName) {
+        let oldName = this.data.name;
+
         this.data.name = newName;
         this.save();
+
+        let renameAlert = showAlert('renameAlert', 'SYSTEM', `You have changed your name from ${oldName} to ${newName}.`);
+        renameAlert.show();
+
+        renameAlert._element.addEventListener('hidden.bs.modal', function () {
+            removeAlert('renameAlert');
+        });
     }
 
     modifyItemProperty(type, category, itemId, property, newValue) {
@@ -136,6 +149,7 @@ class SoloManager {
         // Create a new alert item
         const alertItem = document.createElement('a');
         alertItem.classList.add('dropdown-item', 'd-flex', 'align-items-center');
+        alertItem.setAttribute('href', '#')
 
         // Add the inner HTML structure for the alert item
         alertItem.innerHTML = `
@@ -150,6 +164,102 @@ class SoloManager {
         // Append the new alert item to the dropdown menu
         dropdownMenu.appendChild(alertItem);
     }
+
+    reset() {
+        localStorage.clear();
+
+        let resetAlert = showAlert('resetAlert', 'SYSTEM', `You have reset your progress.`);
+        resetAlert.show();
+
+        resetAlert._element.addEventListener('hidden.bs.modal', function () {
+            removeAlert('resetAlert');
+            location.reload();
+        });
+    }
+
+    generateHTML() {
+        // Clear existing content
+        const storeContainer = document.getElementById('storeContainer');
+        const exchangeContainer = document.getElementById('exchangeContainer');
+        storeContainer.innerHTML = '';
+        exchangeContainer.innerHTML = '';
+    
+        // Dynamically create and append the Store section
+        for (let category in this.data.store) {
+            for (let subCategory in this.data.store[category]) {
+                const storeCard = this.createSectionCard(`Store - ${category} - ${subCategory}`, this.data.store[category][subCategory]);
+                storeContainer.appendChild(storeCard);
+            }
+        }
+    
+        // Dynamically create and append the Exchange section
+        for (let category in this.data.store) {
+            for (let subCategory in this.data.store[category]) {
+                const exchangeCard = this.createSectionCard(`Exchange - ${category} - ${subCategory}`, this.data.store[category][subCategory]);
+                exchangeContainer.appendChild(exchangeCard);
+            }
+        }
+    }
+    
+    createSectionCard(sectionName, items) {
+        // Create the card element
+        const card = document.createElement('div');
+        card.className = 'card text-white bg-dark mb-3';
+    
+        // Create the card header
+        const cardHeader = document.createElement('div');
+        cardHeader.className = 'card-header bg-primary d-flex justify-content-between align-items-center';
+        cardHeader.innerHTML = `<h5 class="mb-0">${sectionName}</h5>`;
+        card.appendChild(cardHeader);
+    
+        // Create the list group for items
+        const listGroup = document.createElement('ul');
+        listGroup.className = 'list-group list-group-flush';
+    
+        // Append items to the list group
+        items.forEach(item => {
+            const listItem = this.createListItem(item);
+            listGroup.appendChild(listItem);
+        });
+    
+        card.appendChild(listGroup);
+    
+        return card;
+    }
+    
+    createListItem(item) {
+        // Create the list item element
+        const listItem = document.createElement('li');
+        listItem.className = 'list-group-item bg-dark d-flex justify-content-between align-items-start';
+    
+        // Set the inner HTML of the list item
+        listItem.innerHTML = `
+            <span>${item.name}</span>
+            <div class="d-flex flex-column align-items-end">
+                ${item.badges.map(badge => `<span class="badge bg-primary mb-2">${badge}</span>`).join('')}
+            </div>
+        `;
+    
+        return listItem;
+    }
+
+    createSubCategoryInJSON(sectionName, category, subCategory) {
+        this.data[sectionName][category][subCategory] = [];
+        this.save();
+    }
+
+    deleteSubCategoryInJSON(sectionName, category, subCategory) {
+        delete this.data[sectionName][category][subCategory];
+        this.save();
+    }
+
+    editSubCategoryInJSON(sectionName, category, subCategory, newValues) {
+        this.data[sectionName][category][subCategory] = {
+            ...this.data[sectionName][category][subCategory],
+            ...newValues
+        };
+        this.save();
+    }
 }
 
 // if soloData is not found in localStorage, create a new one with default values
@@ -157,8 +267,8 @@ const soloManager = new SoloManager();
 
 // if soloData is found in localStorage, load it, otherwise create a new one with default values
 if (!localStorage.getItem('soloData')) {
-    // run the createAndShowPopups(); function and save returned value to as a name of the user in soloData
-    createAndShowPopups(function (nameInit) {
+    // run the systemInit(); function and save returned value to as a name of the user in soloData
+    systemInit(function (nameInit) {
         soloManager.data.name = nameInit;
         soloManager.save();
     });
@@ -169,3 +279,57 @@ if (!localStorage.getItem('soloData')) {
     // Add notification to the notification center with the current date and time as the timestamp and the alert text as "Welcome back, [name]!"
     soloManager.addNotification(`Welcome back, ${soloManager.data.name}!`, new Date().toLocaleString());
 }
+
+function populateDefaultItems() {
+    // create subcategories in the 'shop' category in the 'store' section called 'modes' and 'habits
+    soloManager.createSubCategoryInJSON('store', 'shop', 'modes');
+    soloManager.createSubCategoryInJSON('store', 'shop', 'habits');
+    
+    // add items to the 'modes' subcategory in the 'shop' category in the 'store' section
+    soloManager.createItem('store', 'modes', {
+        name: 'Pomodoro',
+        badges: ['10 coins', '3 points', '1 LVL UP']
+    });
+    soloManager.createItem('store', 'modes', {
+        name: 'Deep Work',
+        badges: ['20 coins', '5 points', '1 LVL UP']
+    });
+
+    // add items to the 'habits' subcategory in the 'shop' category in the 'store' section
+    soloManager.createItem('store', 'habits', {
+        name: 'Reading',
+        badges: ['5 coins', '2 points', '1 LVL UP']
+    });
+    soloManager.createItem('store', 'habits', {
+        name: 'Meditation',
+        badges: ['5 coins', '2 points', '1 LVL UP']
+    });
+
+
+    // create subcategories in the 'exchange' category in the 'store' section called 'lifestyle' and 'skills
+    soloManager.createSubCategoryInJSON('store', 'exchange', 'lifestyle');
+    soloManager.createSubCategoryInJSON('store', 'exchange', 'skills');
+
+    // add items to the 'lifestyle' subcategory in the 'exchange' category in the 'store' section
+    soloManager.createItem('store', 'exchange', {
+        name: 'Health',
+        badges: ['10 coins', '3 points', '1 LVL UP']
+    });
+    soloManager.createItem('store', 'exchange', {
+        name: 'Wealth',
+        badges: ['20 coins', '5 points', '1 LVL UP']
+    });
+
+    // add items to the 'skills' subcategory in the 'exchange' category in the 'store' section
+    soloManager.createItem('store', 'exchange', {
+        name: 'Programming',
+        badges: ['5 coins', '2 points', '1 LVL UP']
+    });
+    soloManager.createItem('store', 'exchange', {
+        name: 'Design',
+        badges: ['5 coins', '2 points', '1 LVL UP']
+    });
+}
+
+// Call the function to populate the default items
+//populateDefaultItems();

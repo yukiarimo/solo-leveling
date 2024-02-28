@@ -289,102 +289,9 @@
 					</div>
 
 					<div class="tab-o container mt-4" id="2">
-						<div class="row">
-							<div class="col-12">
-								<div class="card text-white bg-dark mb-3">
-									<div
-										class="card-header bg-primary d-flex justify-content-between align-items-center">
-										<h5 class="mb-0">Store</h5>
-										<i class="fas fa-shopping-bag"></i>
-									</div>
-								</div>
-							</div>
-
-							<div class="col-md-6">
-								<div class="card text-white bg-dark mb-3">
-									<div
-										class="card-header bg-primary d-flex justify-content-between align-items-center">
-										<h5 class="mb-0">Modes</h5>
-									</div>
-									<ul class="list-group list-group-flush">
-										<li class="list-group-item bg-dark">
-											<span>Hard</span>
-											<span class="badge bg-primary float-end">50 coins</span>
-											<span class="badge bg-primary float-end">Level 5</span>
-											<span class="badge bg-primary float-end">Time 24h</span>
-										</li>
-										<li class="list-group-item bg-dark">
-											<span>Easy</span>
-											<span class="badge bg-primary float-end">25 coins</span>
-											<span class="badge bg-primary float-end">Level 2</span>
-											<span class="badge bg-primary float-end">Time 12h</span>
-										</li>
-									</ul>
-								</div>
-							</div>
-
-							<div class="col-md-6">
-								<div class="card text-white bg-dark mb-3">
-									<div
-										class="card-header bg-primary d-flex justify-content-between align-items-center">
-										<h5 class="mb-0">Shop</h5>
-									</div>
-									<ul class="list-group list-group-flush">
-										<li class="list-group-item bg-dark">
-											<span>Night read</span>
-											<span class="badge bg-primary float-end">50 coins</span>
-										</li>
-										<li class="list-group-item bg-dark">
-											<span>Todo</span>
-											<span class="badge bg-primary float-end">20 coins</span>
-										</li>
-									</ul>
-								</div>
-							</div>
-
-
-							<div class="col-12">
-								<div class="card text-white bg-dark mb-3">
-									<div
-										class="card-header bg-primary d-flex justify-content-between align-items-center">
-										<h5 class="mb-0">Exchange</h5>
-									</div>
-								</div>
-							</div>
-
-							<div class="col-md-6">
-								<div class="card text-white bg-dark mb-3">
-									<div
-										class="card-header bg-primary d-flex justify-content-between align-items-center">
-										<h5 class="mb-0">Base</h5>
-									</div>
-									<ul class="list-group list-group-flush">
-										<li class="list-group-item bg-dark">
-											<span>1 coin</span>
-											<span class="badge bg-primary float-end">3 points</span>
-										</li>
-										<li class="list-group-item bg-dark">
-											<span>1 LVL UP</span>
-											<span class="badge bg-primary float-end">10 coins</span>
-										</li>
-									</ul>
-								</div>
-							</div>
-
-							<div class="col-md-6">
-								<div class="card text-white bg-dark mb-3">
-									<div
-										class="card-header bg-primary d-flex justify-content-between align-items-center">
-										<h5 class="mb-0">Benefit</h5>
-									</div>
-									<ul class="list-group list-group-flush">
-										<li class="list-group-item bg-dark">
-											<span>25 XP</span>
-											<span class="badge bg-primary float-end">5 points</span>
-										</li>
-									</ul>
-								</div>
-							</div>
+						<div class="row" id="storeAllContainer">
+							<div class="col-md-6" id="storeContainer"></div>
+							<div class="col-md-6" id="exchangeContainer"></div>
 						</div>
 					</div>
 
@@ -566,8 +473,8 @@
 									</div>
 									<!-- Account Actions -->
 									<div class="mb-3">
-										<button type="button" class="btn btn-warning">Change Password</button>
-										<button type="button" class="btn btn-danger">Delete Account</button>
+										<button type="button" class="btn btn-danger"
+											onclick="soloManager.reset();">Reset System</button>
 									</div>
 								</form>
 							</div>
@@ -580,7 +487,6 @@
 
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/bootstrap.bundle.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
 	<script src="assets/js/script.min.js"></script>
 </body>
 
