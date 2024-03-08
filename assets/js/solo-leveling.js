@@ -215,6 +215,13 @@ class SoloManager {
         // Create the list group for items
         const listGroup = document.createElement('ul');
         listGroup.className = 'list-group list-group-flush';
+
+        console.log(sectionName);
+        console.log(items);
+        if (!Array.isArray(items)) {
+            console.error('Invalid items: expected an array');
+            return;
+        }
     
         // Append items to the list group
         items.forEach(item => {
