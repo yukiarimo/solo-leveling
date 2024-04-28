@@ -288,55 +288,27 @@ if (!localStorage.getItem('soloData')) {
 }
 
 function populateDefaultItems() {
-    // create subcategories in the 'shop' category in the 'store' section called 'modes' and 'habits
+    // create subcategories in the 'shop' category in the 'store' section called 'modes'
     soloManager.createSubCategoryInJSON('store', 'shop', 'modes');
-    soloManager.createSubCategoryInJSON('store', 'shop', 'habits');
-    
-    // add items to the 'modes' subcategory in the 'shop' category in the 'store' section
-    soloManager.createItem('store', 'modes', {
-        name: 'Pomodoro',
-        badges: ['10 coins', '3 points', '1 LVL UP']
-    });
-    soloManager.createItem('store', 'modes', {
-        name: 'Deep Work',
-        badges: ['20 coins', '5 points', '1 LVL UP']
-    });
 
-    // add items to the 'habits' subcategory in the 'shop' category in the 'store' section
-    soloManager.createItem('store', 'habits', {
-        name: 'Reading',
-        badges: ['5 coins', '2 points', '1 LVL UP']
-    });
-    soloManager.createItem('store', 'habits', {
-        name: 'Meditation',
-        badges: ['5 coins', '2 points', '1 LVL UP']
-    });
-
-
-    // create subcategories in the 'exchange' category in the 'store' section called 'lifestyle' and 'skills
-    soloManager.createSubCategoryInJSON('store', 'exchange', 'lifestyle');
-    soloManager.createSubCategoryInJSON('store', 'exchange', 'skills');
-
-    // add items to the 'lifestyle' subcategory in the 'exchange' category in the 'store' section
-    soloManager.createItem('store', 'exchange', {
-        name: 'Health',
-        badges: ['10 coins', '3 points', '1 LVL UP']
-    });
-    soloManager.createItem('store', 'exchange', {
-        name: 'Wealth',
-        badges: ['20 coins', '5 points', '1 LVL UP']
-    });
-
-    // add items to the 'skills' subcategory in the 'exchange' category in the 'store' section
-    soloManager.createItem('store', 'exchange', {
-        name: 'Programming',
-        badges: ['5 coins', '2 points', '1 LVL UP']
-    });
-    soloManager.createItem('store', 'exchange', {
-        name: 'Design',
-        badges: ['5 coins', '2 points', '1 LVL UP']
+    // add an item to the 'modes' subcategory in the 'shop' category in the 'store' section
+    soloManager.createItem('store', 'shop', {
+        id: '1',
+        name: 'Easy Mode',
+        badges: ['NEW']
     });
 }
 
 // Call the function to populate the default items
-//populateDefaultItems();
+populateDefaultItems();
+
+// download the soloData from the localStorage
+function downloadSoloData() {
+    const data = soloManager.data;
+    const filename = 'soloData.json';
+    const file = new Blob([JSON.stringify(data)], { type: 'application/json' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(file);
+    a.download = filename;
+    a.click();
+}
