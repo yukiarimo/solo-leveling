@@ -11,7 +11,6 @@ toolbox.precache([
     "/assets/fonts/kawai-font.woff",
     "/assets/js/bootstrap.bundle.min.js",
     "/assets/js/index.js",
-    "/assets/js/jquery.min.js",
     "/assets/img/solo-leveling.png",
 ]);
 

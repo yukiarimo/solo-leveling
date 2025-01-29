@@ -63,74 +63,86 @@ if (isMobile) {
   }
 }
 
-function createAndShowPopups(callback) {
-  if (localStorage.getItem('status') === 'undefined' || localStorage.getItem('status') === null) {
-    // Function to create a Bootstrap modal with custom styles
-    function createModal(id, title, body) {
-      const modalHTML = `
-      <div class="modal fade" id="${id}" tabindex="-1" aria-labelledby="${id}Label" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content custom-modal-style">
-            <div class="modal-header">
-              <h5 class="modal-title custom-title-style" id="${id}Label">${title}</h5>
-              <button type="button" class="btn-close custom-close-style" id="${id}-close-btn" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body custom-body-style">
-              ${body}
-            </div>
+// function to make a popup modal template
+function showAlert(id, title, body) {
+  const modalHTML = `
+    <div class="modal fade" id="${id}" tabindex="-1" aria-labelledby="${id}Label" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content custom-modal-style">
+          <div class="modal-header">
+            <h5 class="modal-title custom-title-style" id="${id}Label">${title}</h5>
+            <button type="button" class="btn-close custom-close-style" id="${id}-close-btn" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body custom-body-style">
+            ${body}
           </div>
         </div>
       </div>
-    `;
-      document.body.insertAdjacentHTML('beforeend', modalHTML);
-      return new bootstrap.Modal(document.getElementById(id), {
-        backdrop: 'static', // Make backdrop static so it doesn't close the modal on click
-        keyboard: false // Disable closing modal with keyboard
-      });
-    }
+    </div>
+  `;
+  document.body.insertAdjacentHTML('beforeend', modalHTML);
+  return new bootstrap.Modal(document.getElementById(id), {
+    backdrop: 'static', // Make backdrop static so it doesn't close the modal on click
+    keyboard: false // Disable closing modal with keyboard
+  });
+}
 
-    // Function to remove a modal from the DOM
-    function removeModal(id) {
-      const modalElement = document.getElementById(id);
-      if (modalElement && modalElement.parentNode) {
-        modalElement.parentNode.removeChild(modalElement);
-      }
-    }
+// Function to remove a modal from the DOM
+function removeAlert(id) {
+  const modalElement = document.getElementById(id);
+  if (modalElement && modalElement.parentNode) {
+    modalElement.parentNode.removeChild(modalElement);
+  }
+}
 
+function systemInit(callback) {
+  if (localStorage.getItem('status') === 'undefined' || localStorage.getItem('status') === null) {
     // Create the first modal
-    const firstModal = createModal('firstModal', 'ALARM', '[ WELCOME, PLAYER ]');
+    const firstModal = showAlert('firstModal', 'ALARM', '[ WELCOME, PLAYER ]');
 
     // Show the first modal
     firstModal.show();
 
     // When the first modal is closed, remove it and create the second modal
     firstModal._element.addEventListener('hidden.bs.modal', function () {
-      removeModal('firstModal');
+      removeAlert('firstModal');
 
       // Create and show the second modal
-      const secondModal = createModal('secondModal', 'SYSTEM', `
+      const secondModal = showAlert('secondModal', 'SYSTEM', `
         <form id="inputForm" class="form-inline justify-content-center">
           <div class="mb-3">
-            <input type="text" class="form-control" id="inputField" placeholder="Enter your name">
+            <input type="text" class="form-control" id="initNameField" placeholder="Enter your name">
           </div>
           <button type="button" class="btn btn-primary" onclick="initializeSystem()">Submit</button>
         </form>
       `);
       secondModal.show();
 
+      // Add an event listener to the input field for the Enter key
+      document.getElementById('initNameField').addEventListener('keypress', function (event) {
+        if (event.key === 'Enter') {
+          event.preventDefault(); // Prevent the default form submission
+          initializeSystem(); // Call the function to process the input and close the modal
+
+          // Close the modal manually since initializeSystem() doesn't do it
+          // Assuming you have a reference to the close button of the second modal
+          document.getElementById('secondModal-close-btn').click();
+        }
+      });
+
       // When the second modal is closed, remove it
       secondModal._element.addEventListener('hidden.bs.modal', function () {
         // get the input value from the input field and store it in the local storage
-        localStorage.setItem('nameInit', document.getElementById('inputField').value);
-        removeModal('secondModal');
+        localStorage.setItem('nameInit', document.getElementById('initNameField').value);
+        removeAlert('secondModal');
 
         // Create and show the third modal
-        const thirdModal = createModal('thirdModal', 'SYSTEM', `Ready ${localStorage.getItem('nameInit')}! You are ready to play!`);
+        const thirdModal = showAlert('thirdModal', 'SYSTEM', `Ready ${localStorage.getItem('nameInit')}! You are ready to play!`);
         thirdModal.show();
 
         // When the third modal is closed, remove it and call the callback with the value
         thirdModal._element.addEventListener('hidden.bs.modal', function () {
-          removeModal('thirdModal');
+          removeAlert('thirdModal');
           const nameInit = localStorage.getItem('nameInit');
           if (callback) {
             callback(nameInit);
@@ -143,7 +155,7 @@ function createAndShowPopups(callback) {
 
 function initializeSystem() {
   secondModal = document.getElementById('secondModal-close-btn');
-  const inputField = document.getElementById('inputField');
-  console.log(inputField.value);
+  const initNameField = document.getElementById('initNameField');
+  console.log(initNameField.value);
   secondModal.click();
 }

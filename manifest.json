@@ -2,7 +2,7 @@
     "short_name": "Solo Leveling",
     "name": "Solo Leveling",
     "icons": [{
-        "src": "https://yukiarimo.github.io/solo-leveling/assets/img/solo-leveling.png",
+        "src": "/assets/img/solo-leveling.png",
         "type": "image/png",
         "sizes": "512X512",
         "purpose": "any maskable"
